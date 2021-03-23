@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Conversor</title>
+    <link rel="stylesheet" href="converte_base.css">
+</head>
+
+<body>
+    <main class="corpo">
+        <div class="titulo">
+            <label>
+                <h1>
+                    <center>conversor de bases:</center>
+                </h1>
+            </label>
+        </div>
+        <div class="box">
+            <div class="interacao">
+                <div class="input">
+                    <label>
+                        <h2>informe o número:</h2>
+                    </label>
+                    <input type="text" id="caixaDoNumero" required />
+                    <select id="base">
+                        <option selected value="2">Base </option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                    </select>
+                    <div class="botton">
+                        <input type="submit" id="save" value="Converter" />
+                    </div>
+                </div>
+
+                <label for="resultado">
+                    <h2>resultado:</h2>
+                </label>
+                <fieldset class="output">
+                    <form id="output"></form>
+
+                </fieldset>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        const botao = document.getElementById("save");
+        var baseFornecida = document.getElementById("base");
+        var caixaDoNumero = document.getElementById("caixaDoNumero");
+
+        function Converte() {
+            var base = baseFornecida.value;
+            var valor = caixaDoNumero.value;
+            var resultado = [];
+
+            while (valor / base != 0) {
+                var resto = valor % base;
+                valor = parseInt(valor / base);
+                resultado.push(resto);
+            }
+
+            if (base == "16") {
+                Hexadecimal(resultado);
+            }
+
+            resultado = resultado.reverse().join(" ");
+
+            document.getElementById("output").innerHTML = (`${resultado}`);
+        };
+
+        function Hexadecimal(resultado) {
+            for (let i = 0; i < resultado.length; i++) {
+                switch (resultado[i]) {
+                    case 10:
+                        resultado[i] = "A";
+                        break;
+                    case 11:
+                        resultado[i] = "B";
+                        break;
+                    case 12:
+                        resultado[i] = "C";
+                        break;
+                    case 13:
+                        resultado[i] = "D";
+                        break;
+                    case 14:
+                        resultado[i] = "E";
+                        break;
+                    case 15:
+                        resultado[i] = "F";
+                        break;
+                    case 16:
+                        resultado[i] = 10;
+                        break;
+                }
+            }
+        };
+
+        botao.onclick = Converte;
+
+    </script>
+</body>
+
+</html>
